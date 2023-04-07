@@ -2,21 +2,27 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "./page.module.css";
 import Header from "@/components/Header";
+import { Suspense } from "react";
+import Loader from "@/components/Loader";
 
 const inter = Inter({ subsets: ["latin"] });
 
 const getData = async () => {
   const data = await fetch(`https://www.reddit.com/.json`);
+
   return data.json();
 };
 
 export default async function Home() {
   const data = await getData();
   const post = data.data.children[0].data.title;
+  throw new Error("yikes, that's the wrong number !");
 
   return (
     <main className={styles.main}>
-      <Header />
+      <Suspense fallback={<Loader />}>
+        <Header />
+      </Suspense>
       <h1>{post}</h1>
       <div className={styles.description}>
         <p>
