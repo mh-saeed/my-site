@@ -16,7 +16,7 @@ const getData = async () => {
 export default async function Home() {
   const data = await getData();
   const post = data.data.children[0].data.title;
-  throw new Error("yikes, that's the wrong number !");
+  // throw new Error("yikes, that's the wrong number !");
 
   return (
     <main className={styles.main}>
